@@ -1,0 +1,136 @@
+loadrt litexcnc
+loadrt litexcnc_eth config_file="//home/pi/LiteX-CNC/fabio_hal/5a-75e-fabio-1.json"
+loadrt threads name1=test-thread period1=10000000
+
+addf test_Fabio.read test-thread
+addf test_Fabio.write test-thread
+
+setp test_Fabio.watchdog.timeout_ns 15000000
+
+setp test_Fabio.stepgen.00.maxaccel       1000.0
+setp test_Fabio.stepgen.00.maxvel         1000.0
+setp test_Fabio.stepgen.00.position-scale 1
+setp test_Fabio.stepgen.00.position-mode  TRUE
+setp test_Fabio.stepgen.00.steplen        100
+setp test_Fabio.stepgen.00.stepspace      100
+setp test_Fabio.stepgen.00.dir-hold-time  500
+setp test_Fabio.stepgen.00.dir-setup-time 500
+setp test_Fabio.stepgen.00.enable         1
+
+setp test_Fabio.debug          false
+
+setp test_Fabio.stepgen.01.maxaccel       10000.0
+setp test_Fabio.stepgen.01.maxvel         10000.0
+setp test_Fabio.stepgen.01.position-scale 100
+setp test_Fabio.stepgen.01.position-mode  TRUE
+setp test_Fabio.stepgen.01.steplen        100
+setp test_Fabio.stepgen.01.stepspace      100
+setp test_Fabio.stepgen.01.dir-hold-time  500
+setp test_Fabio.stepgen.01.dir-setup-time 500
+setp test_Fabio.stepgen.01.enable         1
+
+setp test_Fabio.encoder.00.position_scale 1
+setp test_Fabio.encoder.00.x4_mode FALSE
+setp test_Fabio.encoder.01.position_scale 1
+setp test_Fabio.encoder.01.x4_mode FALSE
+setp test_Fabio.encoder.02.position_scale 1
+setp test_Fabio.encoder.02.x4_mode FALSE
+setp test_Fabio.encoder.03.position_scale 1
+setp test_Fabio.encoder.03.x4_mode FALSE
+setp test_Fabio.encoder.04.position_scale 1
+setp test_Fabio.encoder.04.x4_mode FALSE
+setp test_Fabio.encoder.05.position_scale 1
+setp test_Fabio.encoder.05.x4_mode FALSE
+
+loadusr -Wn TestPanel pyvcp -c TestPanel testpanel.xml
+
+#net EnDrv <= colorcnc.1.enable_drive => TestPanel.EnDrv => TestPanel.EnDrvLed
+
+net In0 <= test_Fabio.gpio.00.in => TestPanel.In0
+net In1 <= test_Fabio.gpio.01.in => TestPanel.In1
+net In2 <= test_Fabio.gpio.02.in => TestPanel.In2
+net In3 <= test_Fabio.gpio.03.in => TestPanel.In3
+net In4 <= test_Fabio.gpio.04.in => TestPanel.In4
+net In5 <= test_Fabio.gpio.05.in => TestPanel.In5
+net In6 <= test_Fabio.gpio.06.in => TestPanel.In6
+net In7 <= test_Fabio.gpio.07.in => TestPanel.In7
+net In8 <= test_Fabio.gpio.08.in => TestPanel.In8
+net In9 <= test_Fabio.gpio.09.in => TestPanel.In9
+net In10 <= test_Fabio.gpio.10.in => TestPanel.In10
+net In11 <= test_Fabio.gpio.11.in => TestPanel.In11
+
+net Out0 <= TestPanel.Out0 => test_Fabio.gpio.00.out
+net Out1 <= TestPanel.Out1 => test_Fabio.gpio.01.out
+net Out2 <= TestPanel.Out2 => test_Fabio.gpio.02.out
+net Out3 <= TestPanel.Out3 => test_Fabio.gpio.03.out
+net Out4 <= TestPanel.Out4 => test_Fabio.gpio.04.out
+net Out5 <= TestPanel.Out5 => test_Fabio.gpio.05.out
+net Out6 <= TestPanel.Out6 => test_Fabio.gpio.06.out
+net Out7 <= TestPanel.Out7 => test_Fabio.gpio.07.out
+net Out8 <= TestPanel.Out8 => test_Fabio.gpio.08.out
+net Out9 <= TestPanel.Out9 => test_Fabio.gpio.09.out
+net Out10 <= TestPanel.Out10 => test_Fabio.gpio.10.out
+net Out11 <= TestPanel.Out11 => test_Fabio.gpio.11.out
+
+net PWMen0 <= TestPanel.PWM_EN0 => test_Fabio.pwm.00.enable
+net PWMen1 <= TestPanel.PWM_EN1 => test_Fabio.pwm.01.enable
+net PWMen2 <= TestPanel.PWM_EN2 => test_Fabio.pwm.02.enable
+
+net Per0 <= TestPanel.perpwm0-f => test_Fabio.pwm.00.pwm_freq
+net Per1 <= TestPanel.perpwm1-f => test_Fabio.pwm.01.pwm_freq
+net Per2 <= TestPanel.perpwm2-f => test_Fabio.pwm.02.pwm_freq
+
+net Wdt0 <= TestPanel.wpwm0-f => test_Fabio.pwm.00.value
+net Wdt1 <= TestPanel.wpwm1-f => test_Fabio.pwm.01.value
+net Wdt2 <= TestPanel.wpwm2-f => test_Fabio.pwm.02.value
+
+net Enc0 <= test_Fabio.encoder.00.position => TestPanel.Enc0
+net Enc1 <= test_Fabio.encoder.01.position => TestPanel.Enc1
+net Enc2 <= test_Fabio.encoder.02.position => TestPanel.Enc2
+net Enc3 <= test_Fabio.encoder.03.position => TestPanel.Enc3
+net Enc4 <= test_Fabio.encoder.04.position => TestPanel.Enc4
+net Enc5 <= test_Fabio.encoder.05.position => TestPanel.Enc5
+
+net En0 <= TestPanel.Sg0En => test_Fabio.stepgen.00.enable
+#net Counts0 <= test_Fabio.stepgen.00.counts => TestPanel.Sg0Count
+net PosFb0 <= test_Fabio.stepgen.00.position-feedback => TestPanel.Sg0PosFb
+net PosCmd0 <= TestPanel.Sg0PosCmd-f => test_Fabio.stepgen.00.position-cmd
+net VelFb0 <= test_Fabio.stepgen.00.speed-feedback => TestPanel.Sg0VelFb
+net VelCmd0 <= TestPanel.Sg0VelCmd-f => test_Fabio.stepgen.00.velocity-cmd
+
+net En1 <= TestPanel.Sg1En => test_Fabio.stepgen.01.enable
+#net Counts1 <= test_Fabio.stepgen.01.counts => TestPanel.Sg1Count
+net PosFb1 <= test_Fabio.stepgen.01.position-feedback  => TestPanel.Sg1PosFb
+net PosCmd1 <= TestPanel.Sg1PosCmd-f => test_Fabio.stepgen.01.position-cmd
+net VelFb1 <= test_Fabio.stepgen.01.speed-feedback => TestPanel.Sg1VelFb
+net VelCmd1 <= TestPanel.Sg1VelCmd-f => test_Fabio.stepgen.01.velocity-cmd
+
+net En2 <= TestPanel.Sg2En => test_Fabio.stepgen.02.enable
+#net Counts2 <= test_Fabio.stepgen.02.counts => TestPanel.Sg2Count
+net PosFb2 <= test_Fabio.stepgen.02.position-feedback => TestPanel.Sg2PosFb
+net PosCmd2 <= TestPanel.Sg2PosCmd-f => test_Fabio.stepgen.02.position-cmd
+net VelFb2 <= test_Fabio.stepgen.02.speed-feedback => TestPanel.Sg2VelFb
+net VelCmd2 <= TestPanel.Sg2VelCmd-f => test_Fabio.stepgen.02.velocity-cmd
+
+net En3 <= TestPanel.Sg3En => test_Fabio.stepgen.03.enable
+#net Counts3 <= test_Fabio.stepgen.03.counts => TestPanel.Sg3Count
+net PosFb3 <= test_Fabio.stepgen.03.position-feedback => TestPanel.Sg3PosFb
+net PosCmd3 <= TestPanel.Sg3PosCmd-f => test_Fabio.stepgen.03.position-cmd
+net VelFb3 <= test_Fabio.stepgen.03.speed-feedback => TestPanel.Sg3VelFb
+net VelCmd3 <= TestPanel.Sg3VelCmd-f => test_Fabio.stepgen.03.velocity-cmd
+
+net En4 <= TestPanel.Sg4En => test_Fabio.stepgen.04.enable
+#net Counts4 <= test_Fabio.stepgen.04.counts => TestPanel.Sg4Count
+net PosFb4 <= test_Fabio.stepgen.04.position-feedback => TestPanel.Sg4PosFb
+net PosCmd4 <= TestPanel.Sg4PosCmd-f => test_Fabio.stepgen.04.position-cmd
+net VelFb4 <= test_Fabio.stepgen.04.speed-feedback => TestPanel.Sg4VelFb
+net VelCmd4 <= TestPanel.Sg4VelCmd-f => test_Fabio.stepgen.04.velocity-cmd
+
+net En5 <= TestPanel.Sg5En => test_Fabio.stepgen.05.enable
+#net Counts5 <= test_Fabio.stepgen.05.counts => TestPanel.Sg5Count
+net PosFb5 <= test_Fabio.stepgen.05.position-feedback => TestPanel.Sg5PosFb
+net PosCmd5 <= TestPanel.Sg5PosCmd-f => test_Fabio.stepgen.05.position-cmd
+net VelFb5 <= test_Fabio.stepgen.05.speed-feedback => TestPanel.Sg5VelFb
+net VelCmd5 <= TestPanel.Sg5VelCmd-f => test_Fabio.stepgen.05.velocity-cmd
+
+start

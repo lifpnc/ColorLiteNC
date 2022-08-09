@@ -1,0 +1,550 @@
+<pyvcp>
+  <vbox>
+    <hbox>
+      <relief>RIDGE</relief>
+      <bd>6</bd>
+      <vbox>
+        <label text="IO0"/>
+        <led halpin="In0"/>
+        <checkbutton halpin="Out0"/>
+      </vbox>
+      <vbox>
+        <label text="IO1"/>
+        <led halpin="In1"/>
+        <checkbutton halpin="Out1"/>
+      </vbox>
+      <vbox>
+        <label text="IO2"/>
+        <led halpin="In2"/>
+        <checkbutton halpin="Out2"/>
+      </vbox>
+      <vbox>
+        <label text="IO3"/>
+        <led halpin="In3"/>
+        <checkbutton halpin="Out3"/>
+      </vbox>
+      <vbox>
+        <label text="IO4"/>
+        <led halpin="In4"/>
+        <checkbutton halpin="Out4"/>
+      </vbox>
+      <vbox>
+        <label text="IO5"/>
+        <led halpin="In5"/>
+        <checkbutton halpin="Out5"/>
+      </vbox>
+      <vbox>
+        <label text="IO6"/>
+        <led halpin="In6"/>
+        <checkbutton halpin="Out6"/>
+      </vbox>
+      <vbox>
+        <label text="IO7"/>
+        <led halpin="In7"/>
+        <checkbutton halpin="Out7"/>
+      </vbox>
+      <vbox>
+        <label text="IO8"/>
+        <led halpin="In8"/>
+        <checkbutton halpin="Out8"/>
+      </vbox>
+      <vbox>
+        <label text="IO9"/>
+        <led halpin="In9"/>
+        <checkbutton halpin="Out9"/>
+      </vbox>
+      <vbox>
+        <label text="IO10"/>
+        <led halpin="In10"/>
+        <checkbutton halpin="Out10"/>
+      </vbox>
+      <vbox>
+        <label text="IO11"/>
+        <led halpin="In11"/>
+        <checkbutton halpin="Out11"/>
+      </vbox>
+    </hbox>
+    <hbox>
+      <relief>RIDGE</relief>
+      <bd>6</bd>
+      <vbox>
+        <label text="Encoder0"/>
+        <number halpin="Enc0" format="3.3f"/>
+      </vbox>
+      <vbox>
+        <label text="Encoder1"/>
+        <number halpin="Enc1" format="3.3f"/>
+      </vbox>
+      <vbox>
+        <label text="Encoder2"/>
+        <number halpin="Enc2" format="3.3f"/>
+      </vbox>
+      <vbox>
+        <label text="Encoder3"/>
+        <number halpin="Enc3" format="3.3f"/>
+      </vbox>
+      <vbox>
+        <label text="Encoder4"/>
+        <number halpin="Enc4" format="3.3f"/>
+      </vbox>
+      <vbox>
+        <label text="Encoder5"/>
+        <number halpin="Enc5" format="3.3f"/>
+      </vbox>
+    </hbox>
+    <hbox>
+      <vbox>
+        <relief>RIDGE</relief>
+        <bd>6</bd>
+        <label text="PWM0"/>
+        <scale>
+          <font>("Helvetica",12)</font>
+          <width>"25"</width>
+          <halpin>"perpwm0"</halpin>
+          <resolution>1</resolution>
+          <orient>HORIZONTAL</orient>
+          <initval>0</initval>
+          <min_>0</min_>
+          <max_>10000</max_>
+        </scale>
+        <label text="Freq"/>
+        <scale>
+          <font>("Helvetica",12)</font>
+          <width>"25"</width>
+          <halpin>"wpwm0"</halpin>
+          <resolution>0.001</resolution>
+          <orient>HORIZONTAL</orient>
+          <initval>0</initval>
+          <min_>0</min_>
+          <max_>1</max_>
+        </scale>
+        <label text="Width"/>
+      </vbox>
+      <vbox>
+        <relief>RIDGE</relief>
+        <bd>6</bd>
+        <label text="PWM1"/>
+        <scale>
+          <font>("Helvetica",12)</font>
+          <width>"25"</width>
+          <halpin>"perpwm1"</halpin>
+          <resolution>1</resolution>
+          <orient>HORIZONTAL</orient>
+          <initval>0</initval>
+          <min_>0</min_>
+          <max_>10000</max_>
+        </scale>
+        <label text="Freq"/>
+        <scale>
+          <font>("Helvetica",12)</font>
+          <width>"25"</width>
+          <halpin>"wpwm1"</halpin>
+          <resolution>0.001</resolution>
+          <orient>HORIZONTAL</orient>
+          <initval>0</initval>
+          <min_>0</min_>
+          <max_>1</max_>
+        </scale>
+        <label text="Width"/>
+      </vbox>
+      <vbox>
+        <relief>RIDGE</relief>
+        <bd>6</bd>
+        <label text="PWM2"/>
+        <scale>
+          <font>("Helvetica",12)</font>
+          <width>"25"</width>
+          <halpin>"perpwm2"</halpin>
+          <resolution>1</resolution>
+          <orient>HORIZONTAL</orient>
+          <initval>0</initval>
+          <min_>0</min_>
+          <max_>10000</max_>
+        </scale>
+        <label text="Freq"/>
+        <scale>
+          <font>("Helvetica",12)</font>
+          <width>"25"</width>
+          <halpin>"wpwm2"</halpin>
+          <resolution>0.001</resolution>
+          <orient>HORIZONTAL</orient>
+          <initval>0</initval>
+          <min_>0</min_>
+          <max_>1</max_>
+        </scale>
+        <label text="Width"/>
+      </vbox>
+      <vbox> 
+        <label text="Enable Drive"/>
+        <led halpin="EnDrvLed"/>
+        <checkbutton halpin="EnDrv"/>
+      </vbox>
+    </hbox>
+    <vbox>
+      <hbox>
+        <vbox>
+          <relief>RIDGE</relief>
+          <bd>6</bd>
+          <hbox>
+            <label text="Stepgen 0"/>
+            <checkbutton halpin="Sg0En"/>
+            <label text="Enable"/>
+            <checkbutton halpin="Sg0Res"/>
+            <label text="Reset"/>
+          </hbox>
+          <hbox>
+            <label text="Counts:"/>
+            <s32>
+              <halpin>"Sg0Count"</halpin>
+              <font>("Helvetica",12)</font>
+              <format>"6d"</format>
+              <width>6</width>
+            </s32>
+          </hbox>
+          <hbox>
+            <vbox>
+              <scale>
+                <font>("Helvetica",12)</font>
+                <width>"25"</width>
+                <halpin>"Sg0PosCmd"</halpin>
+                <resolution>0.1</resolution>
+                <orient>HORIZONTAL</orient>
+                <initval>0</initval>
+                <min_>-1000</min_>
+                <max_>1000</max_>
+              </scale>
+              <label text="Pos Cmd"/>
+              <number> 
+                <halpin>"Sg0PosFb"</halpin>
+                <font>("Helvetica",12)</font>
+                <format>"+4.4f"</format>
+              </number>
+              <label text="Pos Fb"/>
+            </vbox>
+            <vbox>
+              <scale>
+                <font>("Helvetica",12)</font>
+                <width>"25"</width>
+                <halpin>"Sg0VelCmd"</halpin>
+                <resolution>0.1</resolution>
+                <orient>HORIZONTAL</orient>
+                <initval>0</initval>
+                <min_>-1000</min_>
+                <max_>1000</max_>
+              </scale>
+              <label text="Vel Cmd"/>
+              <number> 
+                <halpin>"Sg0VelFb"</halpin>
+                <font>("Helvetica",12)</font>
+                <format>"+4.4f"</format>
+              </number>
+              <label text="Vel Fb"/>
+            </vbox>
+          </hbox>
+        </vbox>
+        <vbox>
+          <relief>RIDGE</relief>
+          <bd>6</bd>
+          <hbox>
+            <label text="Stepgen 1"/>
+            <checkbutton halpin="Sg1En"/>
+            <label text="Enable"/>
+            <checkbutton halpin="Sg1Res"/>
+            <label text="Reset"/>
+          </hbox>
+          <hbox>
+            <label text="Counts:"/>
+            <s32>
+              <halpin>"Sg1Count"</halpin>
+              <font>("Helvetica",12)</font>
+              <format>"6d"</format>
+              <width>6</width>
+            </s32>
+          </hbox>
+          <hbox>
+            <vbox>
+              <scale>
+                <font>("Helvetica",12)</font>
+                <width>"25"</width>
+                <halpin>"Sg1PosCmd"</halpin>
+                <resolution>0.1</resolution>
+                <orient>HORIZONTAL</orient>
+                <initval>0</initval>
+                <min_>-1000</min_>
+                <max_>1000</max_>
+              </scale>
+              <label text="Pos Cmd"/>
+              <number> 
+                <halpin>"Sg1PosFb"</halpin>
+                <font>("Helvetica",12)</font>
+                <format>"+4.4f"</format>
+              </number>
+              <label text="Pos Fb"/>
+            </vbox>
+            <vbox>
+              <scale>
+                <font>("Helvetica",12)</font>
+                <width>"25"</width>
+                <halpin>"Sg1VelCmd"</halpin>
+                <resolution>0.1</resolution>
+                <orient>HORIZONTAL</orient>
+                <initval>0</initval>
+                <min_>-1000</min_>
+                <max_>1000</max_>
+              </scale>
+              <label text="Vel Cmd"/>
+              <number> 
+                <halpin>"Sg1VelFb"</halpin>
+                <font>("Helvetica",12)</font>
+                <format>"+4.4f"</format>
+              </number>
+              <label text="Vel Fb"/>
+            </vbox>
+          </hbox>
+        </vbox>
+        <vbox>
+          <relief>RIDGE</relief>
+          <bd>6</bd>
+          <hbox>
+            <label text="Stepgen 2"/>
+            <checkbutton halpin="Sg2En"/>
+            <label text="Enable"/>
+            <checkbutton halpin="Sg2Res"/>
+            <label text="Reset"/>
+          </hbox>
+          <hbox>
+            <label text="Counts:"/>
+            <s32>
+              <halpin>"Sg2Count"</halpin>
+              <font>("Helvetica",12)</font>
+              <format>"6d"</format>
+              <width>6</width>
+            </s32>
+          </hbox>
+          <hbox>
+            <vbox>
+              <scale>
+                <font>("Helvetica",12)</font>
+                <width>"25"</width>
+                <halpin>"Sg2PosCmd"</halpin>
+                <resolution>0.1</resolution>
+                <orient>HORIZONTAL</orient>
+                <initval>0</initval>
+                <min_>-1000</min_>
+                <max_>1000</max_>
+              </scale>
+              <label text="Pos Cmd"/>
+              <number> 
+                <halpin>"Sg2PosFb"</halpin>
+                <font>("Helvetica",12)</font>
+                <format>"+4.4f"</format>
+              </number>
+              <label text="Pos Fb"/>
+            </vbox>
+            <vbox>
+              <scale>
+                <font>("Helvetica",12)</font>
+                <width>"25"</width>
+                <halpin>"Sg2VelCmd"</halpin>
+                <resolution>0.1</resolution>
+                <orient>HORIZONTAL</orient>
+                <initval>0</initval>
+                <min_>-1000</min_>
+                <max_>1000</max_>
+              </scale>
+              <label text="Vel Cmd"/>
+              <number> 
+                <halpin>"Sg2VelFb"</halpin>
+                <font>("Helvetica",12)</font>
+                <format>"+4.4f"</format>
+              </number>
+              <label text="Vel Fb"/>
+            </vbox>
+          </hbox>
+        </vbox>
+      </hbox>
+      <hbox>
+        <vbox>
+          <relief>RIDGE</relief>
+          <bd>6</bd>
+          <hbox>
+            <label text="Stepgen 3"/>
+            <checkbutton halpin="Sg3En"/>
+            <label text="Enable"/>
+            <checkbutton halpin="Sg3Res"/>
+            <label text="Reset"/>
+          </hbox>
+          <hbox>
+            <label text="Counts:"/>
+            <s32>
+              <halpin>"Sg3Count"</halpin>
+              <font>("Helvetica",12)</font>
+              <format>"6d"</format>
+              <width>6</width>
+            </s32>
+          </hbox>
+          <hbox>
+            <vbox>
+              <scale>
+                <font>("Helvetica",12)</font>
+                <width>"25"</width>
+                <halpin>"Sg3PosCmd"</halpin>
+                <resolution>0.1</resolution>
+                <orient>HORIZONTAL</orient>
+                <initval>0</initval>
+                <min_>-1000</min_>
+                <max_>1000</max_>
+              </scale>
+              <label text="Pos Cmd"/>
+              <number> 
+                <halpin>"Sg3PosFb"</halpin>
+                <font>("Helvetica",12)</font>
+                <format>"+4.4f"</format>
+              </number>
+              <label text="Pos Fb"/>
+            </vbox>
+            <vbox>
+              <scale>
+                <font>("Helvetica",12)</font>
+                <width>"25"</width>
+                <halpin>"Sg3VelCmd"</halpin>
+                <resolution>0.1</resolution>
+                <orient>HORIZONTAL</orient>
+                <initval>0</initval>
+                <min_>-1000</min_>
+                <max_>1000</max_>
+              </scale>
+              <label text="Vel Cmd"/>
+              <number> 
+                <halpin>"Sg3VelFb"</halpin>
+                <font>("Helvetica",12)</font>
+                <format>"+4.4f"</format>
+              </number>
+              <label text="Vel Fb"/>
+            </vbox>
+          </hbox>
+        </vbox>
+        <vbox>
+          <relief>RIDGE</relief>
+          <bd>6</bd>
+          <hbox>
+            <label text="Stepgen 4"/>
+            <checkbutton halpin="Sg4En"/>
+            <label text="Enable"/>
+            <checkbutton halpin="Sg4Res"/>
+            <label text="Reset"/>
+          </hbox>
+          <hbox>
+            <label text="Counts:"/>
+            <s32>
+              <halpin>"Sg4Count"</halpin>
+              <font>("Helvetica",12)</font>
+              <format>"6d"</format>
+              <width>6</width>
+            </s32>
+          </hbox>
+          <hbox>
+            <vbox>
+              <scale>
+                <font>("Helvetica",12)</font>
+                <width>"25"</width>
+                <halpin>"Sg4PosCmd"</halpin>
+                <resolution>0.1</resolution>
+                <orient>HORIZONTAL</orient>
+                <initval>0</initval>
+                <min_>-1000</min_>
+                <max_>1000</max_>
+              </scale>
+              <label text="Pos Cmd"/>
+              <number> 
+                <halpin>"Sg4PosFb"</halpin>
+                <font>("Helvetica",12)</font>
+                <format>"+4.4f"</format>
+              </number>
+              <label text="Pos Fb"/>
+            </vbox>
+            <vbox>
+              <scale>
+                <font>("Helvetica",12)</font>
+                <width>"25"</width>
+                <halpin>"Sg4VelCmd"</halpin>
+                <resolution>0.1</resolution>
+                <orient>HORIZONTAL</orient>
+                <initval>0</initval>
+                <min_>-1000</min_>
+                <max_>1000</max_>
+              </scale>
+              <label text="Vel Cmd"/>
+              <number> 
+                <halpin>"Sg4VelFb"</halpin>
+                <font>("Helvetica",12)</font>
+                <format>"+4.4f"</format>
+              </number>
+              <label text="Vel Fb"/>
+            </vbox>
+          </hbox>
+        </vbox>
+        <vbox>
+          <relief>RIDGE</relief>
+          <bd>6</bd>
+          <hbox>
+            <label text="Stepgen 5"/>
+            <checkbutton halpin="Sg5En"/>
+            <label text="Enable"/>
+            <checkbutton halpin="Sg5Res"/>
+            <label text="Reset"/>
+          </hbox>
+          <hbox>
+            <label text="Counts:"/>
+            <s32>
+              <halpin>"Sg5Count"</halpin>
+              <font>("Helvetica",12)</font>
+              <format>"6d"</format>
+              <width>6</width>
+            </s32>
+          </hbox>
+          <hbox>
+            <vbox>
+              <scale>
+                <font>("Helvetica",12)</font>
+                <width>"25"</width>
+                <halpin>"Sg5PosCmd"</halpin>
+                <resolution>0.1</resolution>
+                <orient>HORIZONTAL</orient>
+                <initval>0</initval>
+                <min_>-1000</min_>
+                <max_>1000</max_>
+              </scale>
+              <label text="Pos Cmd"/>
+              <number> 
+                <halpin>"Sg5PosFb"</halpin>
+                <font>("Helvetica",12)</font>
+                <format>"+4.4f"</format>
+              </number>
+              <label text="Pos Fb"/>
+            </vbox>
+            <vbox>
+              <scale>
+                <font>("Helvetica",12)</font>
+                <width>"25"</width>
+                <halpin>"Sg5VelCmd"</halpin>
+                <resolution>0.1</resolution>
+                <orient>HORIZONTAL</orient>
+                <initval>0</initval>
+                <min_>-1000</min_>
+                <max_>1000</max_>
+              </scale>
+              <label text="Vel Cmd"/>
+              <number> 
+                <halpin>"Sg5VelFb"</halpin>
+                <font>("Helvetica",12)</font>
+                <format>"+4.4f"</format>
+              </number>
+              <label text="Vel Fb"/>
+            </vbox>
+          </hbox>
+        </vbox>
+      </hbox>
+    </vbox>
+  </vbox>
+</pyvcp>

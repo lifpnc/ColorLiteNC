@@ -1,0 +1,47 @@
+compile:
+
+
+halcompile --compile colorcnc.c
+
+sudo halcompile --install colorcnc.c
+
+The current version ( April 4, 2022) seems to be stable when 
+
+- using a direct connection between the host and the colorlight card,
+- setting a static ARP entry on the host before starting linuxcnc, ( not sure if still neccessary)
+- turn off avahi-daemon 
+- don't do anything else on your host while using linuxcnc, esp on a raspi pi4
+
+The reason is, that the current Litex core for the colorlight card does get unresponsive when two packets (of any kind) are received within a short time. ( a few microseconds)
+
+setting a static ARP:
+sudo arp -s 192.168.1.50 -i eth0 10:e2:d5:00:00:00
+
+turning of avahi-daemon ( at least on the RPI4)
+sudo systemctl stop avahi-daemon.socket avahi-daemon.service
+sudo systemctl disable avahi-daemon.socket avahi-daemon.service
+sudo systemctl mask avahi-daemon.socket avahi-daemon.service
+reboot
+check with "ps -ef | fgrep avahi" that the daemon is really dead.
+
+*** PLEASE BE AWARE ***
+This version of the colorcnc driver does check that all packets are really sent before sending the next one with at least 10us delay between them.
+The driver is called once per millisecond from linuxcnc and needs 170 microsecond (us) on average on a raspberry PI4. 
+Nearly all packets are send within 400 usec. There are long periods where 400 usec is the max.
+BUT there are cases that the transmission will be delayed for up to 2-5 or even 10 milliseconds and there may be even longer delays. 
+This seems to be related to computer activity even on the realtime kernel esp. on the raspberry with its slow SD card. 
+Starting linuxcnc does also cause such delays during the first seconds.
+Connecting to the host via vncviewer via wlan definitely causes such delays.
+Connect a display to the video port to see realistic delays. The statistic output is enabled by default.
+DO NOT USE on any machine that cannot tollerate delays close to 100 milliseconds or that will be damaged when the watchdog ( currently 100 ms) stops the stepgen!
+USE AT YOUR OWN RISK in any case!
+
+The current config assumes 6 stepper outputs ( J1, J2) and 12 outputs ( J3, J4).
+The current config assumes 24 inputs (J5 to J8). You need to replace the chips U9, U12, U15 with wires or CBT3245A chips to get the inputs).
+Testet with a colorlight 5a-75b V8.0 only.
+
+BTW: The colorlight card does signal the watchdog (100 ms) state with the green led on the card. 
+It will reenable when the messages continue.
+The button acts as reset.
+
+

@@ -1,0 +1,146 @@
+loadrt colorcnc
+loadrt threads name1=scope-thread period1=200000 name2=test-thread period2=1000000
+addf colorcnc.1.update test-thread
+setp colorcnc.1.stepgen.dirtime 100
+setp colorcnc.1.stepgen.steplen 100
+setp colorcnc.1.stepgen.0.scale 8000
+setp colorcnc.1.stepgen.0.maxvel 1500
+setp colorcnc.1.stepgen.0.mode 1
+setp colorcnc.1.stepgen.0.enable 1
+setp colorcnc.1.stepgen.1.scale 100
+setp colorcnc.1.stepgen.1.maxvel 1500
+setp colorcnc.1.stepgen.1.mode 1
+setp colorcnc.1.stepgen.1.enable 1
+setp colorcnc.1.stepgen.2.scale 100
+setp colorcnc.1.stepgen.2.maxvel 1500
+setp colorcnc.1.stepgen.2.mode 1
+setp colorcnc.1.stepgen.2.enable 1
+setp colorcnc.1.stepgen.3.scale 100
+setp colorcnc.1.stepgen.3.maxvel 1500
+setp colorcnc.1.stepgen.3.mode 1
+setp colorcnc.1.stepgen.3.enable 1
+setp colorcnc.1.stepgen.4.scale 100
+setp colorcnc.1.stepgen.4.maxvel 1500
+setp colorcnc.1.stepgen.4.mode 1
+setp colorcnc.1.stepgen.4.enable 1
+setp colorcnc.1.stepgen.5.scale 100
+setp colorcnc.1.stepgen.5.maxvel 1500
+setp colorcnc.1.stepgen.5.mode 1
+setp colorcnc.1.stepgen.5.enable 1
+setp colorcnc.1.feedback.enc_scale0 0.001
+setp colorcnc.1.feedback.enc_scale1 0.001
+setp colorcnc.1.feedback.enc_scale2 0.001
+setp colorcnc.1.feedback.enc_scale3 0.001
+setp colorcnc.1.feedback.enc_scale4 0.001
+setp colorcnc.1.feedback.enc_scale5 0.001
+
+loadrt conv_s32_u32 count=6
+addf conv-s32-u32.0 test-thread
+addf conv-s32-u32.1 test-thread
+addf conv-s32-u32.2 test-thread
+addf conv-s32-u32.3 test-thread
+addf conv-s32-u32.4 test-thread
+addf conv-s32-u32.5 test-thread
+
+loadusr -Wn TestPanel pyvcp -c TestPanel testpanel.xml
+
+net EnDrv <= colorcnc.1.enable_drive => TestPanel.EnDrv => TestPanel.EnDrvLed
+
+net In0 <= colorcnc.1.pins.pin-00-in => TestPanel.In0
+net In1 <= colorcnc.1.pins.pin-01-in => TestPanel.In1
+net In2 <= colorcnc.1.pins.pin-02-in => TestPanel.In2
+net In3 <= colorcnc.1.pins.pin-03-in => TestPanel.In3
+net In4 <= colorcnc.1.pins.pin-04-in => TestPanel.In4
+net In5 <= colorcnc.1.pins.pin-05-in => TestPanel.In5
+net In6 <= colorcnc.1.pins.pin-06-in => TestPanel.In6
+net In7 <= colorcnc.1.pins.pin-07-in => TestPanel.In7
+net In8 <= colorcnc.1.pins.pin-08-in => TestPanel.In8
+net In9 <= colorcnc.1.pins.pin-09-in => TestPanel.In9
+net In10 <= colorcnc.1.pins.pin-10-in => TestPanel.In10
+net In11 <= colorcnc.1.pins.pin-11-in => TestPanel.In11
+
+net Out0 <= TestPanel.Out0 => colorcnc.1.pins.pin-00-out
+net Out1 <= TestPanel.Out1 => colorcnc.1.pins.pin-01-out
+net Out2 <= TestPanel.Out2 => colorcnc.1.pins.pin-02-out
+net Out3 <= TestPanel.Out3 => colorcnc.1.pins.pin-03-out
+net Out4 <= TestPanel.Out4 => colorcnc.1.pins.pin-04-out
+net Out5 <= TestPanel.Out5 => colorcnc.1.pins.pin-05-out
+net Out6 <= TestPanel.Out6 => colorcnc.1.pins.pin-06-out
+net Out7 <= TestPanel.Out7 => colorcnc.1.pins.pin-07-out
+net Out8 <= TestPanel.Out8 => colorcnc.1.pins.pin-08-out
+net Out9 <= TestPanel.Out9 => colorcnc.1.pins.pin-09-out
+net Out10 <= TestPanel.Out10 => colorcnc.1.pins.pin-10-out
+net Out11 <= TestPanel.Out11 => colorcnc.1.pins.pin-11-out
+
+net Per0 <= TestPanel.perpwm0-i => conv-s32-u32.0.in 
+net Per1 <= TestPanel.perpwm1-i => conv-s32-u32.1.in
+net Per2 <= TestPanel.perpwm2-i => conv-s32-u32.2.in
+
+net Per0u <= conv-s32-u32.0.out => colorcnc.1.pwm.period0
+net Per1u <= conv-s32-u32.1.out => colorcnc.1.pwm.period1
+net Per2u <= conv-s32-u32.2.out => colorcnc.1.pwm.period2
+
+net Wdt0 <= TestPanel.wpwm0-i => conv-s32-u32.3.in 
+net Wdt1 <= TestPanel.wpwm1-i => conv-s32-u32.4.in 
+net Wdt2 <= TestPanel.wpwm2-i => conv-s32-u32.5.in 
+
+net Wdt0u <= conv-s32-u32.3.out => colorcnc.1.pwm.width0
+net Wdt1u <= conv-s32-u32.4.out => colorcnc.1.pwm.width1
+net Wdt2u <= conv-s32-u32.5.out => colorcnc.1.pwm.width2
+
+net Enc0 <= colorcnc.1.feedback.encoder0 => TestPanel.Enc0
+net Enc1 <= colorcnc.1.feedback.encoder1 => TestPanel.Enc1
+net Enc2 <= colorcnc.1.feedback.encoder2 => TestPanel.Enc2
+net Enc3 <= colorcnc.1.feedback.encoder3 => TestPanel.Enc3
+net Enc4 <= colorcnc.1.feedback.encoder4 => TestPanel.Enc4
+net Enc5 <= colorcnc.1.feedback.encoder5 => TestPanel.Enc5
+
+net En0 <= TestPanel.Sg0En => colorcnc.1.stepgen.0.enable
+net Res0 <= TestPanel.Sg0Res => colorcnc.1.stepgen.0.reset
+net Counts0 <= colorcnc.1.stepgen.0.counts => TestPanel.Sg0Count
+net PosFb0 <= colorcnc.1.stepgen.0.position-fb => TestPanel.Sg0PosFb
+net PosCmd0 <= TestPanel.Sg0PosCmd-f => colorcnc.1.stepgen.0.position-cmd
+net VelFb0 <= colorcnc.1.stepgen.0.velocity-fb => TestPanel.Sg0VelFb
+net VelCmd0 <= TestPanel.Sg0VelCmd-f => colorcnc.1.stepgen.0.velocity-cmd
+
+net En1 <= TestPanel.Sg1En => colorcnc.1.stepgen.1.enable
+net Res1 <= TestPanel.Sg1Res => colorcnc.1.stepgen.1.reset
+net Counts1 <= colorcnc.1.stepgen.1.counts => TestPanel.Sg1Count
+net PosFb1 <= colorcnc.1.stepgen.1.position-fb => TestPanel.Sg1PosFb
+net PosCmd1 <= TestPanel.Sg1PosCmd-f => colorcnc.1.stepgen.1.position-cmd
+net VelFb1 <= colorcnc.1.stepgen.1.velocity-fb => TestPanel.Sg1VelFb
+net VelCmd1 <= TestPanel.Sg1VelCmd-f => colorcnc.1.stepgen.1.velocity-cmd
+
+net En2 <= TestPanel.Sg2En => colorcnc.1.stepgen.2.enable
+net Res2 <= TestPanel.Sg2Res => colorcnc.1.stepgen.2.reset
+net Counts2 <= colorcnc.1.stepgen.2.counts => TestPanel.Sg2Count
+net PosFb2 <= colorcnc.1.stepgen.2.position-fb => TestPanel.Sg2PosFb
+net PosCmd2 <= TestPanel.Sg2PosCmd-f => colorcnc.1.stepgen.2.position-cmd
+net VelFb2 <= colorcnc.1.stepgen.2.velocity-fb => TestPanel.Sg2VelFb
+net VelCmd2 <= TestPanel.Sg2VelCmd-f => colorcnc.1.stepgen.2.velocity-cmd
+
+net En3 <= TestPanel.Sg3En => colorcnc.1.stepgen.3.enable
+net Res3 <= TestPanel.Sg3Res => colorcnc.1.stepgen.3.reset
+net Counts3 <= colorcnc.1.stepgen.3.counts => TestPanel.Sg3Count
+net PosFb3 <= colorcnc.1.stepgen.3.position-fb => TestPanel.Sg3PosFb
+net PosCmd3 <= TestPanel.Sg3PosCmd-f => colorcnc.1.stepgen.3.position-cmd
+net VelFb3 <= colorcnc.1.stepgen.3.velocity-fb => TestPanel.Sg3VelFb
+net VelCmd3 <= TestPanel.Sg3VelCmd-f => colorcnc.1.stepgen.3.velocity-cmd
+
+net En4 <= TestPanel.Sg4En => colorcnc.1.stepgen.4.enable
+net Res4 <= TestPanel.Sg4Res => colorcnc.1.stepgen.4.reset
+net Counts4 <= colorcnc.1.stepgen.4.counts => TestPanel.Sg4Count
+net PosFb4 <= colorcnc.1.stepgen.4.position-fb => TestPanel.Sg4PosFb
+net PosCmd4 <= TestPanel.Sg4PosCmd-f => colorcnc.1.stepgen.4.position-cmd
+net VelFb4 <= colorcnc.1.stepgen.4.velocity-fb => TestPanel.Sg4VelFb
+net VelCmd4 <= TestPanel.Sg4VelCmd-f => colorcnc.1.stepgen.4.velocity-cmd
+
+net En5 <= TestPanel.Sg5En => colorcnc.1.stepgen.5.enable
+net Res5 <= TestPanel.Sg5Res => colorcnc.1.stepgen.5.reset
+net Counts5 <= colorcnc.1.stepgen.5.counts => TestPanel.Sg5Count
+net PosFb5 <= colorcnc.1.stepgen.5.position-fb => TestPanel.Sg5PosFb
+net PosCmd5 <= TestPanel.Sg5PosCmd-f => colorcnc.1.stepgen.5.position-cmd
+net VelFb5 <= colorcnc.1.stepgen.5.velocity-fb => TestPanel.Sg5VelFb
+net VelCmd5 <= TestPanel.Sg5VelCmd-f => colorcnc.1.stepgen.5.velocity-cmd
+
+start

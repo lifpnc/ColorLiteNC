@@ -1,0 +1,12 @@
+I created a dedicated debug driver and removed the debug code from the etherbone driver. This means that the driver should work for a 5a-75a or 5a-75e.
+
+    It seems your current version of the driver has nothing to do with step generation, is that correct?
+
+
+At this moment only GPIO out is supported by the firmware. The next step is to add more functions to the board, which include PWM (coming tomorrow) and stepgen. My goal is to mimic the existing functions of LinuxCNC as close as possible (thus exporting the same input pins and parameters), so:
+
+    PWM will be based on  pwmgen  and will export the same pins and parameters for a single output PWM. At start only type 0 will be supported, with dithering;
+    stepgen will be based on  stepgen . At start I would like to support type 0 (step/dir) as well as type 1 (up/down).
+    encoder will be based on  encoder .
+
+There is a learning curve for me in producing this code. Every few days I try to add a new feature. The components above are listed in increasing demand of insight on programming. 

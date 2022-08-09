@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+openFPGALoader --freq 500000 --detect --reset
+
+if [[ $? != 0 ]]
+then
+  echo "JTAG problem."
+  exit
+fi
+
+echo " "
+echo " "
+
+openFPGALoader --unprotect-flash --write-flash --verify --freq 500000 --reset  colorlight_5a_75b.bit

@@ -1,0 +1,19 @@
+Hi cncwhacko,
+
+as requested: please find the modified files attached.
+
+I'm still testing, so do not use with real equipment.
+
+Make sure, to connect directly to the host and turn off any ARP or mDNS messages from the host to the colorlight card.
+
+
+** UPDATE: Colorcnc.c itself does send two packets close to each other. It first sends the data from linuxcnc to the card and then immediately requests input data with another packet. Linux usually sends them immediatly ( so there is a small time gap between these packets on the wire) but sometimes linux delays the first packet and sends them close to each other. This seems to be a problem too.
+
+There is already a (commented)  "DELAY 50" in the colorcnc.c from earlier tests.  Change it to
+#define DELAY 400
+This will cause a delay of 400 usec between the two packets. As the update function is called once a millisecond, this will distribute the packet sends as evenly as possible. This will not reduce the update speed of the card.
+
+( No longtime tests by now as they take many hours. But I have seen one crash that happend right after linux sending these two packets together without the usual minimal time gap.)
+
+Cheers,
+Inga 

@@ -1,0 +1,46 @@
+{
+    "board_name": "test_PWM_GPIO",
+    "baseclass": "firmware.boards.ColorLight_5A_75E_V6_0",
+    "clock_frequency": 50000000,
+    "ethphy": {
+        "tx_delay": 0
+    },
+    "etherbone": {
+        "ip_address": "10.0.0.10",
+        "mac_address": "0x10e2d5000000"
+    },
+    "gpio_in": [
+        {"pin":"j2:1"},
+        {"pin":"j2:5"}
+    ],
+    "gpio_out": [
+        {"pin": "j16:1"},
+        {"pin": "j16:5"}
+    ],
+    "pwm": [
+        {"pin": "j16:2"}
+    ],
+    "stepgen": [
+        {
+            "step_pin": "j15:1",
+            "dir_pin": "j15:5",
+            "soft_stop": true
+        },
+        {
+            "step_pin": "j14:1",
+            "dir_pin": "j14:5",
+            "soft_stop": true
+        },
+        {
+            "step_pin": "j13:1",
+            "dir_pin": "j13:5",
+            "soft_stop": true
+        }
+    ],
+    "encoders": [
+        {  
+            "pin_A":"j1:1",
+            "pin_B":"j1:5"
+        }
+    ]
+}

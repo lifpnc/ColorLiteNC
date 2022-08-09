@@ -1,0 +1,10 @@
+ At this moment I'm trying to make the idea of ColorCNC more flexible and expandable to more ColorLight cards. Therefore I started LiteX-CNC based on the contributions.
+
+Trying to:
+- configure the card by a JSON file (click-and-program);
+- firmware split over multiple files for better readability and expansion with new functions;
+- supports all ethernet FPGA cards which are supported by LiteX.
+
+It is still work in progress (only GPIO out is finished at this moment) and not tested as my card is not yet in.
+
+The repository can be found here: github.com/Peter-van-Tol/LiteX-CNC

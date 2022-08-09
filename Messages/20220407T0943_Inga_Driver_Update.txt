@@ -1,0 +1,7 @@
+I have attached the (hopefully) last version of my driver version (based on the romanetz verison). 
+
+This version checks the packet output queue to be empty before sending a new packet. I have also reordered the input request and output send order. The driver now requests input first and waits for the response. The output data is then after the response is received. Please so 0_Info.txt for more details about the changes.
+
+I have also chanded the real tie scheduler to "round robin" as this causes less jitter in the timing. Average processing time is 160 usec on a RPI4. Typical max is 460 usec. But there are delays in the range of 5000 usec and more, depending on the system load. DO NOT USE ON A MACHINE THAT CAN BE DAMAGED BY DELAYS OR SUDDEN STOPS FROM THE WATCHDOG. Statstics output is also included.
+
+I have had not a single card freeze since i use this driver version.

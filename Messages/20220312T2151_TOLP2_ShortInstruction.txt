@@ -1,0 +1,23 @@
+First a quick check question: did you install the Remote containers plugin in VSCode? With this plugin you can easily start the container and use the VS Code terminal to interact with the container. For more information see the   documentation  .
+
+I have improved the container (available on GitLab). I've put oss-cad-suite and LinuxCNC on the path.:
+
+    Building firmare:
+        cd to the root (workspace);
+        type python3 -m firmware <config-file>
+        the output will be placed in a folder with the name of the config-file, cd to this folder and then to gateware, i.e. /workspace/<config-name>/gateware
+        in this folder run chmod +x build_<cardname>.sh followed by ./build_<cardname>.sh;
+        use your tool of choice to load the image to the card.
+    Testing:
+        You can test the firmware and driver with halrun;
+        Start testing with the following command sequence:
+            loadrt litexcnc
+            loadrt litexcnc_eth config_file=<path_to_config_file>
+            loadrt threads name1=servo-thread period1=100000 fp1=1
+            addf <card_name>.0.read servo-thread
+            addf <card_name>.0.write servo-thread
+            show pin
+            show function
+            start
+
+At this moment I'm still puzzling how to access the card from the container when the card is directly attached to the laptop. Because docker will generate its own network, it does not see the card, because it is outside the subnet. Happy testing! 

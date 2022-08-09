@@ -1,0 +1,9 @@
+loadrt colorcnc
+loadrt threads name1=test-thread period1=1000000
+addf colorcnc.1.update test-thread
+setp colorcnc.1.stepgen.0.scale 100
+setp colorcnc.1.stepgen.0.maxvel 1500
+setp colorcnc.1.enable_drive 1
+setp colorcnc.1.stepgen.0.enable 1
+start
+

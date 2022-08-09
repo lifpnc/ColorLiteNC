@@ -1,0 +1,6 @@
+compile:
+
+
+halcompile --compile colorcnc.c
+
+sudo halcompile --install colorcnc.c

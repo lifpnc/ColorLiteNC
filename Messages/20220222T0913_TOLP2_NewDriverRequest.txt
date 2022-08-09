@@ -1,0 +1,8 @@
+Also, I'm looking into the possibility to transform the code into a more configurable package based on Litex (so more boards will be supported, as long as they have Ethernet):
+
+    The board should be configurable with a JSON-file where users can define inputs (max 32), outputs (max 32), stepgens and encoders;
+    The board-file is build using the Litex recommended toolchain, which also gives the layout of the Etherbone package;
+    The configuration-file should also be used by the LinuxCNC component to generate pin-definitions.
+
+Any thoughts on this? 
+

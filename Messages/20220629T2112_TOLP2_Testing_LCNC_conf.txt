@@ -1,0 +1,27 @@
+After some frustrating nights I have found the solution why it didn't work in LinuxCNC with the stepgen. Please find the complete file attached to this post. 
+
+Most important part of the changes are in bold:
+
+setp [LITEXCNC](NAME).stepgen.00.position-scale [JOINT_0]SCALE
+setp [LITEXCNC](NAME).stepgen.00.steplen         5000
+setp [LITEXCNC](NAME).stepgen.00.stepspace       5000
+setp [LITEXCNC](NAME).stepgen.00.dir-hold-time   10000
+setp [LITEXCNC](NAME).stepgen.00.dir-setup-time  10000
+[b]setp [LITEXCNC](NAME).stepgen.00.maxvel   [JOINT_0]MAX_VELOCITY[/b]
+setp [LITEXCNC](NAME).stepgen.00.maxaccel [JOINT_0]STEPGEN_MAXACCEL
+net xpos-cmd joint.0.motor-pos-cmd => [LITEXCNC](NAME).stepgen.00.position-cmd
+net xpos-fb [LITEXCNC](NAME).stepgen.00.[b]position_prediction [/b]=> joint.0.motor-pos-fb
+net xenable joint.0.amp-enable-out => [LITEXCNC](NAME).stepgen.00.enable
+
+
+When the file is generated with stepconf the line defining the max velocity is not generated. Normally, the stepgen of LinuxCNC uses this value, but we cut this component out of the hal-file. So therefore we have to let the FPGA know (or better: the driver of the FPGA) what the limit of the machine is. When this parameter is not set the maxvel is 0 units/second. With other words: the machine won't move in this case.
+
+Other change is that we use the position_prediction as position feedback for the joint. This is the speed the machine will be at when the next command is going to be executed. This gives a nice smooth behavior.
+
+File Attachment:
+File Name: mill_test.ini
+File Size:2 KB
+
+File Attachment:
+File Name: mill_test.hal
+File Size:4 KB

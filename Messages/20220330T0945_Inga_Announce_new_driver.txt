@@ -1,0 +1,26 @@
+Progress Report:
+
+I got my Colorlight 5A-75B V 8.0 working with a (modified) romanetz version ( added a magic and version info as well as a watchdog to stop the machine in case of a loss of communication).
+
+I don't think that the buffer size is the problem. It works with sizes of 200 as well as 1100.
+
+Initially I had stability issues with the romanetz version. The Colorlight card did suddenly not respond anymore.
+
+The main reason for stability issues seem to be unsolicited incoming network packets. I did a lot of testing with wireshark to monitor the packets on the wire and noticed quite often ARP or mDNS packets just before the crash. These packets do not crash the Liteeth core always. But it seems that they can come in a monent which screws up the core.
+
+I got mine working for hours now after
+- using a direct ethernet cable between my Rapsi PI4 and the Colorlight
+- turning off the linux ahavi daemon (which sends mDNS packets to the Colorlight)
+- setting a fixed ARP entry for the Colorlight on the linux side.
+
+Disable ahavi:
+sudo systemctl stop avahi-daemon.socket avahi-daemon.service
+sudo systemctl disable avahi-daemon.service
+
+Use static ARP ( once after restart):
+sudo arp -s 192.168.1.50 10:e2:d5:00:00:00
+
+
+One more remark: The stepgen.v ( the 3,5 KB version from the romanetz verison) does works nicely, when the lines referencing the debug field are unkommented in the python file. As is, the stepper will only move in one direction. ( Don't as me why...,)
+  
+

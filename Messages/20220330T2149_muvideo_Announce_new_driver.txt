@@ -1,0 +1,22 @@
+I'm still plagued by periodic disconnection, anyway I'm uploading my files for who
+is interested in playing with encoder inputs.
+- Board is 5A75B V8.0
+- U9 U12 U15 ic's are replaced (or I-O pads shorted, your preference) for the inputs connection
+- I've attached the input/output map in an odf file
+- I've attached a PyVCP panel for quick testing the connections
+- I've replaced encoder design in original file, my encoders are only quadrature AB, no index input
+- Didnt test well stepgens, didnt change their implemetation, but there is something fishy about their behavior
+- inputs outputs and PWM seem to work ok
+- 12 inputs
+- 12 outputs
+- 3 PWM
+- 6 AB encoder inputs
+- 6 step generators
+- c and h files for the drivers have some edits for encoder interface
+The code is probably broken in several ways, not trustable yet.
+
+File Attachment:
+File Name: colorcnc_fe_v1.tar.gz
+File Size:551 KB
+
+ 

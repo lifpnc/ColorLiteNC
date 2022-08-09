@@ -1,0 +1,103 @@
+{
+    "board_name": "test_Fabio",
+    "baseclass": "firmware.boards.ColorLight_5A_75B_V8_0",
+    "clock_frequency": 50000000,
+    "ethphy": {
+        "tx_delay": 0
+    },
+    "etherbone": {
+        "ip_address": "192.168.2.50",
+        "mac_address": "0x10e2d5000000"
+    },
+    "gpio_in": [
+        {"pin": "j5:0"},
+        {"pin": "j5:1"},
+        {"pin": "j5:2"},
+        {"pin": "j5:4"},
+        {"pin": "j5:5"},
+        {"pin": "j5:6"},
+        {"pin": "j6:0"},
+        {"pin": "j6:1"},
+        {"pin": "j6:2"},
+        {"pin": "j6:4"},
+        {"pin": "j6:5"},
+        {"pin": "j6:6"}
+    ],
+    "gpio_out": [
+        {"pin": "j3:0"},
+        {"pin": "j3:1"},
+        {"pin": "j3:2"},
+        {"pin": "j3:4"},
+        {"pin": "j3:5"},
+        {"pin": "j3:6"},
+        {"pin": "j4:0"},
+        {"pin": "j4:1"},
+        {"pin": "j4:2"},
+        {"pin": "j4:4"},
+        {"pin": "j4:5"},
+        {"pin": "j4:6"}
+    ],
+    "pwm": [
+        {"pin": "j1:8"},
+        {"pin": "j1:9"},
+        {"pin": "j1:10"}
+    ],
+    "stepgen": [
+    	{
+    	"step_pin":"j1:0",
+    	"dir_pin":"j1:1",
+    	"soft_stop": true
+    	},
+    	{
+    	"step_pin":"j1:2",
+    	"dir_pin":"j1:4",
+    	"soft_stop": true
+    	},
+    	{
+    	"step_pin":"j1:5",
+    	"dir_pin":"j1:6",
+    	"soft_stop": true
+    	},
+    	{
+    	"step_pin":"j2:0",
+    	"dir_pin":"j2:1",
+    	"soft_stop": true
+    	},
+    	{
+    	"step_pin":"j2:2",
+    	"dir_pin":"j2:4",
+    	"soft_stop": true
+    	},
+    	{
+    	"step_pin":"j2:5",
+    	"dir_pin":"j2:6",
+    	"soft_stop": true
+    	}
+    ],
+    "encoders": [
+        {
+            "pin_A": "J7:0",
+            "pin_B": "J7:1"
+        },
+        {
+            "pin_A": "J7:2",
+            "pin_B": "J7:4"
+        },
+        {
+            "pin_A": "J7:5",
+            "pin_B": "J7:6"
+        },
+        {
+            "pin_A": "J8:0",
+            "pin_B": "J8:1"
+        },
+        {
+            "pin_A": "J8:2",
+            "pin_B": "J8:4"
+        },
+        {
+            "pin_A": "J8:5",
+            "pin_B": "J8:6"
+        }
+     ]      
+}

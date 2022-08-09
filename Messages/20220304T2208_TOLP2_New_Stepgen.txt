@@ -1,0 +1,4 @@
+ Just uploaded a new IceStudio file for a stepgenerator; this file can be easily converted to a Verilog file and subsequently added to the firmware.
+
+Why not using Pluto-Step? I didn't like the fact it does not take acceleration into account on the FPGA. The standard LinuxCNC stepgen does take acceleration into account. So the code of make_pulses is converted to something a FPGA should easilty run...
+  
